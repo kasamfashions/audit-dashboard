@@ -12,23 +12,13 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
     </style>
-<script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "recharts": "https://esm.sh/recharts@^3.6.0",
-    "@heroicons/react/": "https://esm.sh/@heroicons/react@^2.2.0/",
-    "@google/genai": "https://esm.sh/@google/genai@^1.35.0",
-    "xlsx": "https://esm.sh/xlsx@0.18.5"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
+<!-- Use relative paths so assets resolve correctly on GitHub Pages -->
+<link rel="stylesheet" href="index.css">
+<!-- Inline simple SVG favicon to avoid browser requesting /favicon.ico and returning 404 -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23106b3c'/%3E%3Ctext x='50%25' y='50%25' font-size='10' fill='%23fff' text-anchor='middle' dominant-baseline='central'%3EA%3C/text%3E%3C/svg%3E">
 </head>
 <body class="bg-slate-50 text-slate-900">
     <div id="root"></div>
-<script type="module" src="/index.tsx"></script>
+<script type="module" src="index.tsx"></script>
 </body>
 </html>
