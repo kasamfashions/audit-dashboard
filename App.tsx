@@ -253,32 +253,6 @@ const App: React.FC<{ initialSheetUrl?: string }> = ({ initialSheetUrl }) => {
 
   return (
     <div className="min-h-screen bg-slate-50 pb-20">
-      {/* Header */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="bg-slate-50 p-2 rounded-2xl shadow-inner border border-slate-100">
-              <img
-                src="https://www.dropbox.com/scl/fi/3w8cuktwjostzrb21pafw/LOGO-2.png?rlkey=crkvpkwg128csjf52s565avoa&st=9e7gee2m&raw=1"
-                alt="Kasam Fashions"
-                className="h-10 w-auto object-contain"
-              />
-            </div>
-            <div>
-              <h1 className="text-2xl font-black text-slate-900 tracking-tight leading-none mb-0.5">Kasam Fashions</h1>
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] leading-none">Store Audit</p>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-3">
-            <button className="flex items-center space-x-2 bg-slate-50 text-slate-600 px-5 py-2.5 rounded-2xl text-xs font-black border border-slate-200 transition-all hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-100 shadow-sm">
-              <ClipboardDocumentListIcon className="w-4 h-4" />
-              <span>Audit Form</span>
-            </button>
-          </div>
-        </div>
-      </header>
-
       <main className="max-w-7xl mx-auto px-4 py-8">
         {!isLoaded ? (
           <div className="flex flex-col items-center justify-center py-32 bg-white rounded-3xl border-2 border-dashed border-slate-200 shadow-sm">

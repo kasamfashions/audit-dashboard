@@ -6,7 +6,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
   const repo = process.env.GITHUB_REPOSITORY ? `/${process.env.GITHUB_REPOSITORY.split('/')[1]}/` : undefined;
   // Default base for GitHub Pages for this repository when not provided via env
-  const defaultRepoBase = '/Store_Auditlist/';
+  const defaultRepoBase = '/audit-dashboard/';
   const base = env.VITE_BASE || repo || defaultRepoBase;
   return {
     base,
