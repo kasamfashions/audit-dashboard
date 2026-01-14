@@ -10,8 +10,8 @@ import Classification from './components/Classification';
 import PoorComments from './components/PoorComments';
 import SectionPoints from './components/SectionPoints';
 import CommentsPage from './components/CommentsPage';
-import { 
-  ClipboardDocumentListIcon, 
+import {
+  ClipboardDocumentListIcon,
   CloudArrowUpIcon,
   ExclamationCircleIcon,
   LinkIcon,
@@ -59,7 +59,7 @@ const App: React.FC<{ initialSheetUrl?: string }> = ({ initialSheetUrl }) => {
           .filter(r => r.location === initialLoc)
           .map(r => r.submittedDate)
       )).sort();
-      
+
       setFilters(prev => ({
         ...prev,
         location: initialLoc,
@@ -115,7 +115,7 @@ const App: React.FC<{ initialSheetUrl?: string }> = ({ initialSheetUrl }) => {
         return null as any;
       }
       let isoDate = "";
-      
+
       if (dateVal instanceof Date) {
         isoDate = dateVal.toISOString().split('T')[0];
       } else if (typeof dateVal === 'number') {
@@ -180,13 +180,13 @@ const App: React.FC<{ initialSheetUrl?: string }> = ({ initialSheetUrl }) => {
 
       const response = await fetch(finalUrl);
       if (!response.ok) throw new Error("Failed to fetch. Ensure Sheet is public (Anyone with link).");
-      
+
       const arrayBuffer = await response.arrayBuffer();
       const data = new Uint8Array(arrayBuffer);
       const workbook = XLSX.read(data, { type: 'array', cellDates: true });
       const firstSheet = workbook.SheetNames[0];
       const jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheet]);
-      
+
       setLastFileName("Live Sync");
       processRawData(jsonData);
       setShowSheetInput(false);
@@ -209,7 +209,7 @@ const App: React.FC<{ initialSheetUrl?: string }> = ({ initialSheetUrl }) => {
   const audit1Records = useMemo(() => filterRecordsByDate(auditData, filters, filters.audit1Date), [auditData, filters]);
   const audit2Records = useMemo(() => filterRecordsByDate(auditData, filters, filters.audit2Date), [auditData, filters]);
   const audit3Records = useMemo(() => filterRecordsByDate(auditData, filters, filters.audit3Date), [auditData, filters]);
-  
+
   const has1 = !!filters.audit1Date;
   const has2 = !!filters.audit2Date;
   const has3 = !!filters.audit3Date;
@@ -253,6 +253,31 @@ const App: React.FC<{ initialSheetUrl?: string }> = ({ initialSheetUrl }) => {
 
   return (
     <div className="min-h-screen bg-slate-50 pb-20">
+      {/* Header */}
+      <header className="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <div className="bg-slate-50 p-2 rounded-2xl shadow-inner border border-slate-100">
+              <img
+                src="https://www.dropbox.com/scl/fi/3w8cuktwjostzrb21pafw/LOGO-2.png?rlkey=crkvpkwg128csjf52s565avoa&st=9e7gee2m&raw=1"
+                alt="Kasam Fashions"
+                className="h-10 w-auto object-contain"
+              />
+            </div>
+            <div>
+              <h1 className="text-2xl font-black text-slate-900 tracking-tight leading-none mb-0.5">Kasam Fashions</h1>
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] leading-none">Store Audit</p>
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-3">
+            <button className="flex items-center space-x-2 bg-slate-50 text-slate-600 px-5 py-2.5 rounded-2xl text-xs font-black border border-slate-200 transition-all hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-100 shadow-sm">
+              <ClipboardDocumentListIcon className="w-4 h-4" />
+              <span>Audit Form</span>
+            </button>
+          </div>
+        </div>
+      </header>
 
       <main className="max-w-7xl mx-auto px-4 py-8">
         {!isLoaded ? (
@@ -264,16 +289,16 @@ const App: React.FC<{ initialSheetUrl?: string }> = ({ initialSheetUrl }) => {
           </div>
         ) : (
           <div className="space-y-8">
-            <Filters 
-              filters={filters} 
-              setFilters={setFilters} 
+            <Filters
+              filters={filters}
+              setFilters={setFilters}
               onLocationChange={handleLocationChange}
-              availableLocations={dynamicLocations} 
-              availableSections={dynamicSections} 
-              availableDates={locationSpecificDates} 
+              availableLocations={dynamicLocations}
+              availableSections={dynamicSections}
+              availableDates={locationSpecificDates}
               onToggleComments={() => setShowComments(prev => !prev)}
             />
-            
+
             {hasDataButEmptyFilter ? (
               <div className="bg-white rounded-3xl border border-slate-200 py-24 text-center flex flex-col items-center shadow-sm">
                 <ExclamationCircleIcon className="w-16 h-16 text-amber-500 mb-4" />
@@ -284,17 +309,17 @@ const App: React.FC<{ initialSheetUrl?: string }> = ({ initialSheetUrl }) => {
                 <SummaryCards data={comparison} currentLabel={currentLabel} />
                 <Charts audit1Records={audit1Records} audit2Records={audit2Records} audit3Records={audit3Records} filters={filters} />
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                  <Classification 
-                    audit1Records={audit1Records} 
-                    audit2Records={audit2Records} 
+                  <Classification
+                    audit1Records={audit1Records}
+                    audit2Records={audit2Records}
                     audit3Records={audit3Records}
                     audit1Date={filters.audit1Date}
                     audit2Date={filters.audit2Date}
                     audit3Date={filters.audit3Date}
                   />
-                  <PoorComments 
-                    audit1Records={audit1Records} 
-                    audit2Records={audit2Records} 
+                  <PoorComments
+                    audit1Records={audit1Records}
+                    audit2Records={audit2Records}
                     audit3Records={audit3Records}
                     audit1Date={filters.audit1Date}
                     audit2Date={filters.audit2Date}
